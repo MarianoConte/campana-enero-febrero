@@ -54,7 +54,7 @@ function BottomCard({ marker }: Props) {
         >
           {marker?.nombre}
         </Typography>
-        {marker?.direccion?.length !== 0 ?? (
+        {marker?.direccion?.length !== 0 && (
           <Typography
             variant='body2'
             sx={{
@@ -66,7 +66,7 @@ function BottomCard({ marker }: Props) {
             {marker?.direccion}
           </Typography>
         )}
-        {marker?.info?.length !== 0 ?? (
+        {marker?.info?.length !== 0 && (
           <Typography
             variant='body2'
             sx={{
