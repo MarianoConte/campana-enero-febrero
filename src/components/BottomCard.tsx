@@ -35,8 +35,7 @@ function BottomCard({ marker, setDirections }: Props) {
         key={index}
         variant='body2'
         sx={{
-          fontSize: '1.5rem',
-          padding: '5px',
+          fontSize: '1.2rem',
         }}
       >
         {line}
@@ -98,33 +97,24 @@ function BottomCard({ marker, setDirections }: Props) {
         >
           {marker?.nombre}
         </Typography>
-        {marker?.direccion?.length !== 0 && (
+        {(marker?.direccion?.length !== 0 || marker?.info?.length !== 0) && (
           <Typography
             variant='body2'
             sx={{
-              fontSize: '1.5rem',
+              fontSize: '1.2rem',
               paddingX: '5px',
               paddingY: '10px',
             }}
           >
             {marker?.direccion}
-          </Typography>
-        )}
-        {marker?.info?.length !== 0 && (
-          <Typography
-            variant='body2'
-            sx={{
-              fontSize: '1.5rem',
-            }}
-          >
-            {renderLines(marker?.info)}
+            {marker?.info?.length !== 0 && renderLines(marker?.info)}
           </Typography>
         )}
 
         <Typography
           variant='body2'
           sx={{
-            fontSize: '1.5rem',
+            fontSize: '1.2rem',
             color: 'lightblue',
             '&:hover': {
               cursor: 'pointer',
@@ -138,14 +128,14 @@ function BottomCard({ marker, setDirections }: Props) {
           <Typography
             variant='body2'
             sx={{
-              fontSize: '1.5rem',
+              fontSize: '1.2rem',
             }}
             onClick={calculateRoute}
           >
             {travelInfo?.distance} - {travelInfo?.duration}{' '}
             <DriveEtaIcon
               sx={{
-                fontSize: '1.5rem',
+                fontSize: '1.2rem',
                 verticalAlign: 'middle',
                 marginLeft: '5px',
               }}
