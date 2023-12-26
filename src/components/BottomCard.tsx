@@ -1,11 +1,31 @@
 import { Card, CardContent, Typography } from '@mui/material';
 import { Punto } from './Map';
+import { useEffect, useState } from 'react';
+import DriveEtaIcon from '@mui/icons-material/DriveEta';
 
 interface Props {
   marker?: Punto;
+  setDirections: React.Dispatch<
+    React.SetStateAction<google.maps.DirectionsResult | null>
+  >;
 }
 
-function BottomCard({ marker }: Props) {
+function BottomCard({ marker, setDirections }: Props) {
+  useEffect(() => {
+    setTravelInfo({
+      distance: null,
+      duration: null,
+    });
+  }, [marker]);
+
+  const [travelInfo, setTravelInfo] = useState<{
+    distance: string | null;
+    duration: string | null;
+  }>({
+    distance: null,
+    duration: null,
+  });
+
   const renderLines = (text: string | undefined) => {
     if (!text) return null;
 
@@ -22,6 +42,30 @@ function BottomCard({ marker }: Props) {
         {line}
       </Typography>
     ));
+  };
+
+  const calculateRoute = async () => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      setDirections(null);
+      const { latitude, longitude } = position.coords;
+
+      const origin = `${latitude},${longitude}`;
+      const destination = `${marker?.latitud},${marker?.longitud}`;
+      const directionsService = new google.maps.DirectionsService();
+
+      const results = await directionsService.route({
+        origin: origin,
+        destination: destination,
+        travelMode: google.maps.TravelMode.DRIVING,
+      });
+      if (results) {
+        setDirections(results);
+        setTravelInfo({
+          distance: results?.routes[0]?.legs[0]?.distance?.text || null,
+          duration: results?.routes[0]?.legs[0]?.duration?.text || null,
+        });
+      }
+    });
   };
 
   return (
@@ -74,6 +118,38 @@ function BottomCard({ marker }: Props) {
             }}
           >
             {renderLines(marker?.info)}
+          </Typography>
+        )}
+
+        <Typography
+          variant='body2'
+          sx={{
+            fontSize: '1.5rem',
+            color: 'lightblue',
+            '&:hover': {
+              cursor: 'pointer',
+            },
+          }}
+          onClick={calculateRoute}
+        >
+          ¿Cómo llegar?
+        </Typography>
+        {travelInfo?.distance && travelInfo?.duration && (
+          <Typography
+            variant='body2'
+            sx={{
+              fontSize: '1.5rem',
+            }}
+            onClick={calculateRoute}
+          >
+            {travelInfo?.distance} - {travelInfo?.duration}{' '}
+            <DriveEtaIcon
+              sx={{
+                fontSize: '1.5rem',
+                verticalAlign: 'middle',
+                marginLeft: '5px',
+              }}
+            />
           </Typography>
         )}
       </CardContent>

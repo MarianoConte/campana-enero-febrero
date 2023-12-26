@@ -1,5 +1,10 @@
 import React from 'react';
-import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
+import {
+  DirectionsRenderer,
+  GoogleMap,
+  MarkerF,
+  useLoadScript,
+} from '@react-google-maps/api';
 import { Box, Chip, Grid } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
 import mapStyles from '../constants/mapStyles';
@@ -35,6 +40,8 @@ function Mapa() {
   const [selectedMarker, setSelectedMarker] = React.useState<Punto | null>(
     null
   );
+  const [directions, setDirections] =
+    React.useState<google.maps.DirectionsResult | null>(null);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: `${import.meta.env.VITE_MAPS_API_KEY}`,
@@ -110,6 +117,7 @@ function Mapa() {
   };
 
   const handleClickMarker = (marker: Punto) => {
+    setDirections(null);
     setLat(marker.latitud);
     setLng(marker.longitud);
     setZoom(18);
@@ -117,8 +125,11 @@ function Mapa() {
   };
 
   const handleCloseInfoWindow = () => {
+    setDirections(null);
     setSelectedMarker(null);
   };
+
+  console.log(directions);
 
   if (!isLoaded) return <div>Loading...</div>;
 
@@ -235,7 +246,6 @@ function Mapa() {
         zoom={zoom}
         options={{
           styles: mapStyles,
-          /* remuevo los botones de mapa/satelite y de pantalla completa*/
           mapTypeControl: false,
           fullscreenControl: false,
         }}
@@ -255,8 +265,18 @@ function Mapa() {
             onClick={() => handleClickMarker(marker)}
           />
         ))}
+        {directions && (
+          <DirectionsRenderer
+            directions={directions as google.maps.DirectionsResult}
+            options={{
+              suppressMarkers: true,
+            }}
+          />
+        )}
       </GoogleMap>
-      {selectedMarker && <BottomCard marker={selectedMarker} />}
+      {selectedMarker && (
+        <BottomCard marker={selectedMarker} setDirections={setDirections} />
+      )}
     </Grid>
   );
 }
