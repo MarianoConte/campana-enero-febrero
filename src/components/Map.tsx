@@ -138,7 +138,12 @@ function Mapa() {
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <Grid item xs={12} maxHeight={'95vh'}>
+    <Grid
+      item
+      xs={12}
+      height={'calc(100vh - 5vh)'}
+      sx={{ position: 'relative' }}
+    >
       <Box
         sx={{
           backgroundColor: 'transparent',
@@ -245,7 +250,7 @@ function Mapa() {
         center={{ lat, lng }}
         mapContainerStyle={{
           width: '100%',
-          height: '95vh',
+          height: '100%',
         }}
         zoom={zoom}
         options={{
