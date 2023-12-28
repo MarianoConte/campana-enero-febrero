@@ -8,8 +8,8 @@ const Header = () => {
       xs={12}
       sx={{
         backgroundColor: '#0f1418',
-        height: '5vh',
-        lineHeight: '5vh',
+        height: '40px',
+        lineHeight: '40px',
         textAlign: 'center',
       }}
     >

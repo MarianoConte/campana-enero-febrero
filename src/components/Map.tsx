@@ -138,7 +138,12 @@ function Mapa() {
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <Grid item xs={12} height={'100%'} sx={{ position: 'relative' }}>
+    <Grid
+      item
+      xs={12}
+      height={' calc(100vh - 40px)'}
+      sx={{ position: 'relative' }}
+    >
       <Box
         sx={{
           backgroundColor: 'transparent',
