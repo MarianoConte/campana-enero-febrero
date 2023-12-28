@@ -8,9 +8,15 @@ interface Props {
   setDirections: React.Dispatch<
     React.SetStateAction<google.maps.DirectionsResult | null>
   >;
+  setMyLocationMarker: React.Dispatch<
+    React.SetStateAction<{
+      lat: number | null;
+      long: number | null;
+    }>
+  >;
 }
 
-function BottomCard({ marker, setDirections }: Props) {
+function BottomCard({ marker, setDirections, setMyLocationMarker }: Props) {
   useEffect(() => {
     setTravelInfo({
       distance: null,
@@ -62,6 +68,10 @@ function BottomCard({ marker, setDirections }: Props) {
         setTravelInfo({
           distance: results?.routes[0]?.legs[0]?.distance?.text || null,
           duration: results?.routes[0]?.legs[0]?.duration?.text || null,
+        });
+        setMyLocationMarker({
+          lat: latitude,
+          long: longitude,
         });
       }
     });

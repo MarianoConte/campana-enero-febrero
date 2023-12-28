@@ -40,6 +40,10 @@ function Mapa() {
   const [selectedMarker, setSelectedMarker] = React.useState<Punto | null>(
     null
   );
+  const [myLocationMarker, setMyLocationMarker] = React.useState<{
+    lat: number | null;
+    long: number | null;
+  }>({ lat: null, long: null });
   const [directions, setDirections] =
     React.useState<google.maps.DirectionsResult | null>(null);
 
@@ -122,19 +126,19 @@ function Mapa() {
     setLng(marker.longitud);
     setZoom(18);
     setSelectedMarker(marker);
+    setMyLocationMarker({ lat: null, long: null });
   };
 
   const handleCloseInfoWindow = () => {
     setDirections(null);
     setSelectedMarker(null);
+    setMyLocationMarker({ lat: null, long: null });
   };
-
-  console.log(directions);
 
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} maxHeight={'95vh'}>
       <Box
         sx={{
           backgroundColor: 'transparent',
@@ -265,6 +269,18 @@ function Mapa() {
             onClick={() => handleClickMarker(marker)}
           />
         ))}
+        {myLocationMarker.lat && myLocationMarker.long && (
+          <MarkerF
+            position={{ lat: myLocationMarker.lat, lng: myLocationMarker.long }}
+            icon={{
+              url: 'img/amarillo.png',
+
+              scaledSize: new window.google.maps.Size(50, 50),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(30, 30),
+            }}
+          />
+        )}
         {directions && (
           <DirectionsRenderer
             directions={directions as google.maps.DirectionsResult}
@@ -275,7 +291,11 @@ function Mapa() {
         )}
       </GoogleMap>
       {selectedMarker && (
-        <BottomCard marker={selectedMarker} setDirections={setDirections} />
+        <BottomCard
+          marker={selectedMarker}
+          setDirections={setDirections}
+          setMyLocationMarker={setMyLocationMarker}
+        />
       )}
     </Grid>
   );
