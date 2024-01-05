@@ -142,7 +142,8 @@ function Mapa() {
     <Grid
       item
       xs={12}
-      height={' calc(100vh - 40px)'}
+      height={'calc(100vh - 40px)'}
+      width={'100%'}
       sx={{ position: 'relative' }}
     >
       <Box
