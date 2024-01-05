@@ -53,14 +53,12 @@ function Mapa() {
   });
 
   const handleClickChip = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { innerText } = e.currentTarget;
-
+    const { textContent } = e.currentTarget;
     handleCloseInfoWindow();
     setLat(-38.0054771);
     setLng(-57.5426106);
     setZoom(10);
-    alert(innerText === 'Salones del Reino');
-    switch (innerText) {
+    switch (textContent) {
       case 'Salones del Reino':
         if (selectedLabels.includes('Salones del Reino')) {
           setSelectedLabels(
