@@ -59,6 +59,7 @@ function Mapa() {
     setLat(-38.0054771);
     setLng(-57.5426106);
     setZoom(10);
+    alert(innerText === 'Salones del Reino');
     switch (innerText) {
       case 'Salones del Reino':
         if (selectedLabels.includes('Salones del Reino')) {
