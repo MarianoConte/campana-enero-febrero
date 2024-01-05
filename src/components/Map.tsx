@@ -189,7 +189,7 @@ function Mapa() {
           }}
           label='Salones del Reino'
           icon={<CircleIcon sx={{ fill: 'purple' }} />}
-          onClickCapture={(e) => handleClickChip(e)}
+          onTouchStart={(e) => handleClickChip(e)}
         />
         <Chip
           sx={{
@@ -218,7 +218,7 @@ function Mapa() {
           }}
           label='Sitios de predicación'
           icon={<CircleIcon sx={{ fill: 'red' }} />}
-          onClickCapture={(e) => handleClickChip(e)}
+          onTouchStart={(e) => handleClickChip(e)}
         />
         <Chip
           sx={{
@@ -247,8 +247,7 @@ function Mapa() {
           }}
           label='Sitios de interés turístico'
           icon={<CircleIcon sx={{ fill: 'green' }} />}
-          // agrego click para ios
-          onClickCapture={(e) => handleClickChip(e)}
+          onTouchStart={(e) => handleClickChip(e)}
         />
       </Box>
       <GoogleMap
