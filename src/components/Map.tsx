@@ -261,21 +261,18 @@ function Mapa() {
         onClick={handleCloseInfoWindow}
       >
         {markers.map((marker) => (
-          <div
+          <MarkerF
             key={String(marker.latitud) + String(marker.longitud)}
-            onTouchStart={() => handleClickMarker(marker)}
-          >
-            <MarkerF
-              position={{ lat: marker.latitud, lng: marker.longitud }}
-              icon={{
-                url: marker.icon,
+            position={{ lat: marker.latitud, lng: marker.longitud }}
+            icon={{
+              url: marker.icon,
 
-                scaledSize: new window.google.maps.Size(50, 50),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(30, 30),
-              }}
-            />
-          </div>
+              scaledSize: new window.google.maps.Size(50, 50),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(30, 30),
+            }}
+            onClick={() => handleClickMarker(marker)}
+          />
         ))}
         {myLocationMarker.lat && myLocationMarker.long && (
           <MarkerF
