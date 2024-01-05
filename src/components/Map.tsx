@@ -187,7 +187,7 @@ function Mapa() {
           }}
           label='Salones del Reino'
           icon={<CircleIcon sx={{ fill: 'purple' }} />}
-          onClick={handleClickChip}
+          onClick={() => handleClickChip}
         />
         <Chip
           sx={{
@@ -215,7 +215,7 @@ function Mapa() {
           }}
           label='Sitios de predicación'
           icon={<CircleIcon sx={{ fill: 'red' }} />}
-          onClick={handleClickChip}
+          onClick={() => handleClickChip}
         />
         <Chip
           sx={{
@@ -243,7 +243,7 @@ function Mapa() {
           }}
           label='Sitios de interés turístico'
           icon={<CircleIcon sx={{ fill: 'green' }} />}
-          onClick={handleClickChip}
+          onClick={() => handleClickChip}
         />
       </Box>
       <GoogleMap
