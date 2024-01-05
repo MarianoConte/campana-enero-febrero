@@ -54,7 +54,7 @@ function Mapa() {
 
   const handleClickChip = (e: React.MouseEvent<HTMLDivElement>) => {
     const { innerText } = e.currentTarget;
-    alert(innerText);
+
     handleCloseInfoWindow();
     setLat(-38.0054771);
     setLng(-57.5426106);
@@ -138,6 +138,11 @@ function Mapa() {
 
   if (!isLoaded) return <div>Loading...</div>;
 
+  alert(
+    /* muestro los marcadores */
+    markers.map((marker) => marker.nombre).join('\n')
+  );
+
   return (
     <Grid
       item
@@ -189,7 +194,7 @@ function Mapa() {
           }}
           label='Salones del Reino'
           icon={<CircleIcon sx={{ fill: 'purple' }} />}
-          onTouchStart={(e) => handleClickChip(e)}
+          onClick={(e) => handleClickChip(e)}
         />
         <Chip
           sx={{
@@ -218,7 +223,7 @@ function Mapa() {
           }}
           label='Sitios de predicación'
           icon={<CircleIcon sx={{ fill: 'red' }} />}
-          onTouchStart={(e) => handleClickChip(e)}
+          onClick={(e) => handleClickChip(e)}
         />
         <Chip
           sx={{
@@ -247,7 +252,7 @@ function Mapa() {
           }}
           label='Sitios de interés turístico'
           icon={<CircleIcon sx={{ fill: 'green' }} />}
-          onTouchStart={(e) => handleClickChip(e)}
+          onClick={(e) => handleClickChip(e)}
         />
       </Box>
       <GoogleMap
