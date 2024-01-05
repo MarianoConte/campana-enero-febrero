@@ -54,6 +54,7 @@ function Mapa() {
 
   const handleClickChip = (e: React.MouseEvent<HTMLDivElement>) => {
     const { innerText } = e.currentTarget;
+    alert(innerText);
     handleCloseInfoWindow();
     setLat(-38.0054771);
     setLng(-57.5426106);
