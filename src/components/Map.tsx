@@ -184,6 +184,7 @@ function Mapa() {
                 `,
             },
             marginRight: '5px',
+            cursor: 'pointer',
           }}
           label='Salones del Reino'
           icon={<CircleIcon sx={{ fill: 'purple' }} />}
@@ -210,6 +211,7 @@ function Mapa() {
                       : 'white'
                   }
                 `,
+              cursor: 'pointer',
             },
             marginRight: '5px',
           }}
@@ -238,6 +240,7 @@ function Mapa() {
                       : 'white'
                   }
                 `,
+              cursor: 'pointer',
             },
             marginRight: '5px',
           }}
