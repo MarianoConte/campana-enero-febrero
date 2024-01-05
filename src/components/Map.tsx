@@ -117,6 +117,7 @@ function Mapa() {
         }
         break;
       default:
+        alert('No entré');
         break;
     }
   };
@@ -137,11 +138,6 @@ function Mapa() {
   };
 
   if (!isLoaded) return <div>Loading...</div>;
-
-  alert(
-    /* muestro los marcadores */
-    markers.map((marker) => marker.nombre).join('\n')
-  );
 
   return (
     <Grid
