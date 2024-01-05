@@ -1,10 +1,12 @@
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, IconButton, Typography } from '@mui/material';
 import { Punto } from './Map';
 import { useEffect, useState } from 'react';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
-  marker?: Punto;
+  marker: Punto | null;
+  setMarker: React.Dispatch<React.SetStateAction<Punto | null>>;
   setDirections: React.Dispatch<
     React.SetStateAction<google.maps.DirectionsResult | null>
   >;
@@ -16,7 +18,12 @@ interface Props {
   >;
 }
 
-function BottomCard({ marker, setDirections, setMyLocationMarker }: Props) {
+function BottomCard({
+  marker,
+  setDirections,
+  setMyLocationMarker,
+  setMarker,
+}: Props) {
   useEffect(() => {
     setTravelInfo({
       distance: null,
@@ -107,6 +114,21 @@ function BottomCard({ marker, setDirections, setMyLocationMarker }: Props) {
         >
           {marker?.nombre}
         </Typography>
+        <IconButton
+          sx={{
+            position: 'absolute',
+            right: '15px',
+            top: '15px',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: 'transparent',
+            },
+          }}
+          size='large'
+          onClick={() => setMarker(null)}
+        >
+          <CloseIcon />
+        </IconButton>
         {(marker?.direccion?.length !== 0 || marker?.info?.length !== 0) && (
           <Typography
             variant='body2'

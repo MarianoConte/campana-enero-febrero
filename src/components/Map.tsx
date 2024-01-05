@@ -303,6 +303,7 @@ function Mapa() {
       {selectedMarker && (
         <BottomCard
           marker={selectedMarker}
+          setMarker={setSelectedMarker}
           setDirections={setDirections}
           setMyLocationMarker={setMyLocationMarker}
         />
