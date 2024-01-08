@@ -27,9 +27,9 @@ const lugaresDePredicacion: Punto[] = [
   },
   {
     nombre: 'Centro Comercial Puerto',
-    direccion: 'Av de los Pescadores y Diagonal Buque Pesquero San Gabriel',
-    latitud: -38.0503309,
-    longitud: -57.5396308,
+    direccion: 'Av de los Pescadores y Diagonal San Gabriel',
+    latitud: -38.045597,
+    longitud: -57.542996,
     info: '',
     icon: 'img/4rojo.png',
   },
